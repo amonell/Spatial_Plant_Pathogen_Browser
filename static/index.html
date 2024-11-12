@@ -1,0 +1,444 @@
+
+<html>
+<head>
+	<title>Spatial-Temporal Arabidopsis During Pathogen Infection</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="/static/css/homepagestyle.css">
+	<link rel="icon" type="image/png" href="/static/rosette.ico">
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<style>
+		ul {
+		  list-style-type: none;
+		  margin: 0;
+		  padding: 0;
+		  /*overflow: hidden;*/
+		  background-color: #95c9d0;
+		  position: -webkit-sticky; /* Safari */
+		  position: sticky;
+		  top: 0;
+		  /*min-height: 45px;*/
+
+		}
+
+		li {
+		  /*float: left;*/
+		  display: inline-block;
+		  border-right: 1px solid #bbb;
+
+		}
+
+		/*li a {
+		  display: block;
+		  color: white;
+		  text-align: center;
+		  padding: 14px 10px;
+		  text-decoration: none;
+		}*/
+
+		li a:hover {
+		  background-color: gray;
+		}
+		
+		/*li:last-child {
+  		  border-right: none;
+		}*/
+
+		li a, .dropbtn {
+		  display: inline-block;
+		  color: black;
+		  text-align: center;
+		  padding: 14px 16px;
+		  text-decoration: none;
+		}
+
+		/*li a:hover, .dropdown:hover .dropbtn {
+		  background-color: red;
+		}*/
+
+		li.dropdown {
+		  display: inline-block;
+		}
+
+		.dropdown-content {
+		  display: none;
+		  position: absolute;
+		  background-color: #f9f9f9;
+		  min-width: 160px;
+		  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+		  z-index: 2;
+		}
+
+		.dropdown-content a {
+		  color: black;
+		  padding: 12px 16px;
+		  text-decoration: none;
+		  display: block;
+		  text-align: left;
+		}
+
+		.dropdown-content a:hover {background-color: #f1f1f1;}
+
+		.dropdown:hover .dropdown-content {
+		  display: block;
+		}
+
+		html {
+		  scroll-padding-top: 70px; /* height of sticky header */
+		  scroll-behavior: smooth;
+
+		}
+
+		.arrow {
+		  border: solid black;
+		  border-width: 0 3px 3px 0;
+		  display: inline-block;
+		  padding: 3px;
+		}
+
+		.down {
+		  transform: rotate(45deg);
+		  -webkit-transform: rotate(45deg);
+		}
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        h4 {
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        notice {
+            color: #ff0000;
+            font-weight: bold;
+        }
+
+        .image-container {
+            border: 10px solid #000;
+            margin: 30px 0 0 150px;
+			width:1220;
+            box-sizing: border-box;
+			text-align: center; /* Center the image within the container */
+        }
+
+        img {
+            width: 1200;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+	<header id="about" class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+	</header>
+	<br>
+
+	<ul>
+
+	  <li><a class="active" style="z-index:2" href="#about">About</a></li>
+	  	  
+	  <li class="dropdown">
+		<a href="javascript:void(0)" class="dropbtn">Spatial <i class="arrow down" style="margin-left:5px"></i> </a>
+		<div class="dropdown-content">
+		  <a href="#mock_spatial">Mock (0 hr)</a>
+		  <a href="#4hr_spatial">4hr AvrRpt2</a>
+		  <a href="#6hr_spatial">6hr AvrRpt2</a>
+		  <a href="#9hr_spatial">9hr AvrRpt2</a>
+		  <a href="#24hr_spatial">24hr AvrRpt2</a>
+		  <a href="#24hr_dc3000_spatial">24hr DC3000</a>
+		  <a href="#all_spatial">All Spatial</a>
+		</div>
+		
+
+	  </li>
+
+	  <li class="dropdown">
+		<a href="javascript:void(0)" class="dropbtn">snMultiome <i class="arrow down" style="margin-left:5px"></i> </a>
+		<div class="dropdown-content">
+			<a href="#mock_seq">Mock (0 hr)</a>
+			<a href="#4hr_seq">4hr AvrRpt2</a>
+			<a href="#6hr_seq">6hr AvrRpt2</a>
+			<a href="#9hr_seq">9hr AvrRpt2</a>
+			<a href="#24hr_seq">24hr AvrRpt2</a>
+			<a href="#24hr_dc3000_seq">24hr DC3000</a>
+			<a href="#all_multi">All Multiome</a>
+		</div>
+	  </li>
+
+	  <li class="dropdown">
+		<a href="javascript:void(0)" class="dropbtn">Joint Embedding <i class="arrow down" style="margin-left:5px"></i> </a>
+		<div class="dropdown-content">
+			<a href="#mock_joint">Joint Mock</a>
+			<a href="#4hr_joint">Joint 4hr AvrRpt2</a>
+			<a href="#6hr_joint">Joint 6hr AvrRpt2</a>
+			<a href="#9hr_joint">Joint 9hr AvrRpt2</a>
+			<a href="#24hr_joint">Joint 24hr AvrRpt2</a>
+			<a href="#24hr_joint_dc3000">Joint 24hr DC3000</a>
+		</div>
+	  </li>
+
+	  <li class="dropdown">
+		<a href="javascript:void(0)" class="dropbtn">Information <i class="arrow down" style="margin-left:5px"></i> </a>
+		<div class="dropdown-content">
+
+		  <a href="#tutorial">Tutorial</a>
+		  <a href="#data">Data</a>
+		  <a href="#documentation">Documentation</a>
+		  <a href="#contact">Contact</a>
+		  <a href="#contact">Changelog</a>
+
+
+		</div>
+	  </li>
+
+		</ul>
+			<h1 style="font-size:50px;text-align: center;">Spatial-Temporal Arabidopsis During Pathogen Infection </h1>
+
+
+
+		<h4 style="padding-left:60px">
+			Profiling the transcriptomes of single-cells at different points during a pathogen infection time course. 
+			
+		</h4>
+
+		<h6 style="padding-left:60px;padding-top:20px;padding-right:60px">
+			<p>Plant leaf intercellular space provides a nutrient-rich and heterogeneous niche for microbes that have a critical impact on plant health. However, how individual plant cells respond to heterogeneous microbial colonization remains largely elusive. Here, by time-resolved simultaneous single-cell transcriptome and epigenome profiling of plants (Arabidopsis thaliana) infected by virulent and avirulent bacterial pathogens (Pseudomonas syringae), we present cell atlases and gene regulatory logic involving transcription factors, potential cis-regulatory elements, and target genes associated with disease and immunity. </p>
+			<p>We also identify previously uncharacterized cell populations with distinct immune gene expression within major developmental cell types. Furthermore, we employ time-resolved spatial transcriptomics to reveal spatial heterogeneity of plant immune responses linked to pathogen distribution. Integration of our single-cell multiomics and spatial omics data enables spatiotemporal mapping of defense gene regulatory logic with pathogen cells. Overall, our study provides a molecularly-defined spatiotemporal map of plant-microbe interaction at the single-cell resolution. </p>
+			<p> For a brief tutorial on data exploration click <a href="#tutorial">here</a> </p>
+			
+		<br>
+			
+			<p> Notice: when accessing larger datasets, it may take several minutes to load the dataset </p>
+		</h6>
+
+		<br>
+
+		<div style="text-align:center;">
+			<h4 style="padding-left:60px">
+				<h4>Spatial Experimental Design</h4>
+
+				<div class="image-container">
+					<img src="/static/images/spatial_protocol.png" title="Arabidopsis development" alt="Spatial Protocol Image">
+				</div>
+			<br>
+			  
+			  <h4 style="padding-left:60px">
+				<h4>Single Nucleus Multiome Experimental Design</h4>
+
+				<div class="image-container">
+					<img src="/static/images/seq_protocol.png" title="Single Nucleus Multiome" alt="Seq Protocol Image">
+				</div>
+			<!-- commented out cellxgene gateway links
+			<a href="view/seedling_12d_392221.h5ad/">
+			  <img src="/static/merscope_silique.png" title="Silique spatial dataset" style="width:125px;height:400px;margin:30px;">
+			</a>	--->
+		</div>
+
+	<br>
+
+
+		<div style="text-align:center;">
+			<h4 style="padding-left:60px">
+				<h4>Spatial Experiments - Click to browse</h4>
+			<a href="http://132.239.183.36:5005/view/mock.h5ad/">
+			  <img id="mock_spatial" src="/static/images/spatial_images/Spatial Joint Clusters mock-1.png" title="Mock Spatial" style="width:392px;height:392px;margin:30px;border:4px solid #555;">
+			</a>
+
+			<a href="http://132.239.183.36:5005/view/4hr_avr.h5ad/">
+			  <img id="4hr_spatial" src="/static/images/spatial_images/Spatial Joint Clusters 4hr-1.png" title="4hr Spatial" style="width:392px;height:392px;margin:30px;border:4px solid #555;">
+			</a>
+		</div>
+
+	<br>
+
+		<div style="text-align:center;">
+
+			<a href="http://132.239.183.36:5005/view/6hr_avr.h5ad/">
+			  <img id="6hr_spatial" src="/static/images/spatial_images/Spatial Joint Clusters 6hr-1.png" title="6hr Spatial" style="width:392px;height:392px;margin:30px;border:4px solid #555;">
+			</a>
+
+			<a href="http://132.239.183.36:5005/view/9hr_avr.h5ad/">
+			  <img id="9hr_spatial" src="/static/images/spatial_images/Spatial Joint Clusters 9hr-1.png" title="9hr Spatial" style="width:392px;height:392px;margin:30px;border:4px solid #555;">
+			</a>
+		</div>
+
+	<br>
+
+		<div style="text-align:center;">
+
+
+			<a href="http://132.239.183.36:5005/view/avrrpt24.h5ad/">
+			  <img id="24hr_spatial" src="/static/images/spatial_images/Spatial Joint Clusters 24hr-1.png" title="24hr Spatial" style="width:392px;height:392px;margin:30px;border:4px solid #555;">
+			</a>
+
+			<a href="http://132.239.183.36:5005/view/dc3000.h5ad/">
+			  <img id="24hr_dc3000_spatial" src="/static/images/spatial_images/dc3000.png" title="24hr DC3000 Spatial" style="width:392px;height:392px;margin:30px;border:4px solid #555;">
+			</a>
+
+		</div>
+
+	<br>
+
+		<div style="text-align:center;">
+			<h4 style="padding-left:60px">
+				<h4>Single Nucleus Multiome Experiments</h4>
+			<a href="http://132.239.183.36:5005/view/seq_mock.h5ad/">
+			  <img id="mock_seq" src="/static/images/seq_images/Mock_avr.png" title="Mock seq" style="width:392px;height:392px;margin:30px;border:4px solid #555;">
+			</a>
+
+			<a href="http://132.239.183.36:5005/view/seq_4hr_avr.h5ad/">
+			  <img id="4hr_seq" src="/static/images/seq_images/4hr_avr.png" title="4hr Seq" style="width:392px;height:392px;margin:30px;border:4px solid #555;">
+			</a>
+			
+		</div>
+
+	<br>
+
+		<div style="text-align:center;">
+			<a href="http://132.239.183.36:5005/view/seq_6hr_avr.h5ad/">
+			  <img id="6hr_seq" src="/static/images/seq_images/6hr_avr.png" title="6hr Seq" style="width:392px;height:392px;margin:30px;border:4px solid #555;">
+			</a>
+
+
+			<a href="http://132.239.183.36:5005/view/seq_9hr_avr.h5ad/">
+			  <img id="9hr_seq" src="/static/images/seq_images/9hr_avr.png" title="9hr Seq" style="width:392px;height:392px;align:middle;margin:30px;border:4px solid #555;">
+			</a>
+
+		</div>
+
+	<br>
+	
+		<div style="text-align:center;">
+			<a href="http://132.239.183.36:5005/view/seq_avrrpt24.h5ad/">
+			  <img id="24hr_seq" src="/static/images/seq_images/24hr_avr.png" title="24hr Seq" style="width:392px;height:392px;margin:30px;border:4px solid #555;">
+			</a>
+
+
+			<a href="http://132.239.183.36:5005/view/seq_dc3000.h5ad/">
+			  <img id="24hr_dc3000_seq" src="/static/images/seq_images/24hr_dc3000.png" title="24hr Seq DC3000" style="width:392px;height:392px;align:middle;margin:30px;border:4px solid #555;">
+			</a>
+
+		</div>
+
+	<br>
+
+		<div style="text-align:center;">
+			<h4 style="padding-left:60px">
+				<h4>Joint Embeddings</h4>
+			<a href="http://132.239.183.36:5005/view/joint_spatial.h5ad/">
+			  <img id="mock_joint" src="/static/images/spatial_joint_emb.png" title="Spatial Joint" style="width:392px;height:392px;margin:30px;border:4px solid #555;">
+			</a>
+
+			<a href="http://132.239.183.36:5005/view/seq_joint.h5ad/">
+			  <img id="4hr_joint" src="/static/images/joint_snmulti.png" title="Seq Joint" style="width:392px;height:392px;margin:30px;border:4px solid #555;">
+			</a>
+			
+		</div>
+	<br>
+
+	<h2>
+		<p style="padding-left:35px;"> Access the preprint at: </p>
+			<a href="https://www.biorxiv.org/content/10.1101/2023.04.10.536170v2">
+				  <img src="/static/images/bioRxiv.png" style="width:239px;height:83px;margin:60px;">
+			</a>
+	</h2>
+	
+
+
+
+	<center>
+	
+	<h2 id="tutorial" style="padding:35px">
+
+		<p style="font-size:20px;padding-left:30px;padding-top:50px"> 
+			For in-depth CELLxGENE instructions visit <a href="https://cellxgene.cziscience.com/docs/04__Analyze%20Public%20Data/4_1__Hosted%20Tutorials">CELLxGENE</a>
+		</p>
+
+	<br>
+	
+	
+	</h2>
+
+	</center>
+	
+	<h2 id="data" style="padding:35px">
+		Data
+
+		<p style="font-size:20px;padding-left:30px;padding-top:10px"> 
+			Raw sequencing data, processed data, and imaging data are available by request.
+		</p>	
+	</h2>
+
+
+	<h3 id="documentation" style="padding:35px">
+		Documentation	
+		<p style="font-size:20px;padding-left:30px;padding-top:10px"> 
+			Interactive data browsing utilizes <a href="https://cellxgene.cziscience.com/">CELLxGENE</a>
+		</p>
+		
+		<p style="font-size:20px;padding-left:30px;"> 
+			Dataset serving utilizes <a href="https://github.com/Novartis/cellxgene-gateway">CELLxGENE-gateway</a>
+		</p>
+
+	</h3>
+
+	<h4 id="contact" style="padding-left:35px;">
+		Contact	
+	</h4>
+
+	<h5 style="padding-left:35px;">
+		<p>
+			This spatial-temporal Arabidopsis pathogen atlas is maintained by
+			<a href="mailto:amonell@ucsd.edu">
+				Alexander Monell</a> and <a href="mailto:tnobori@salk.edu">
+					Tatsuya Nobori</a></p>
+	</h5>
+
+
+	<h6 id="changelog" style="padding-left:35px;padding-top:50px;">
+		Changelog
+
+		<p style="font-size:15px;padding-left:50px;width:2400px">
+			12-03-2023 Website Launched. 
+			</p>
+	</h6>
+
+</body>
+</html>
